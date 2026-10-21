@@ -1,0 +1,11 @@
+{
+  "name": "personal-portfolio",
+  "version": "0.1.0",
+  "private": true,
+  "description": "An editable personal portfolio built with HTML, CSS, and JavaScript.",
+  "scripts": {
+    "dev": "node scripts/serve.mjs",
+    "start": "node scripts/serve.mjs",
+    "check": "node --check portfolio.js && node --check scripts/serve.mjs"
+  }
+}
