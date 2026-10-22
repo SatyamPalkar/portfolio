@@ -92,6 +92,7 @@ const portfolio = {
       outcome: "The project includes a live prompt interface, saved benchmark analysis, and API and metric tests. Its published benchmark snapshot is a small local sample; LoRA fine-tuning is listed as future work.",
       evidence: "Streaming API, latency dashboard & tests",
       repository: "https://github.com/SatyamPalkar/Latency-Fine-Tuning",
+      url: "https://satyampalkar.github.io/Latency-Fine-Tuning/",
     },
   ],
 };

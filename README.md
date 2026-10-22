@@ -1,6 +1,17 @@
 # Satyam Palkar — Data & Machine Learning
 
-A local portfolio for Satyam Palkar’s work in data analysis and machine learning, with responsive layouts, category filters, project details, technology lists, and GitHub links. The cream, green, and terracotta visual style is built with plain HTML, CSS, and JavaScript; no dependencies or build step.
+A portfolio for Satyam Palkar’s work in data analysis and machine learning, with responsive layouts, category filters, project details, technology lists, and GitHub links. The cream, green, and terracotta visual style is built with plain HTML, CSS, and JavaScript; no dependencies or build step.
+
+## GitHub Pages
+
+GitHub Pages publishes the repository root on `main`. Commit and push changes to
+update the site. All asset paths are relative, so the portfolio works under the
+`/portfolio/` repository path. `.nojekyll` disables Jekyll processing. No server,
+API key or paid compute plan is required.
+
+The LLM project detail links to the live browser inference demo; its measurements
+are performed on the visitor's device. The repository retains the Python server
+and its separate benchmark implementation.
 
 ## Preview
 
@@ -33,7 +44,7 @@ Project descriptions and the toolkit were informed by the public repository docu
 - [Dialogue summarization](https://github.com/SatyamPalkar/Text-Summarizer): PEGASUS/SAMSum research notebook. Presented as a notebook study; application scaffolding is incomplete.
 - [LLM inference and latency](https://github.com/SatyamPalkar/Latency-Fine-Tuning): FastAPI model serving, streaming, benchmarks, Docker, and dashboards. LoRA is future work in the README.
 
-No employer, commercial deployment, or performance improvement is inferred from these repositories. Forks were not presented as original projects. The profile README’s placeholder email was omitted. Nothing has been published.
+No employer, commercial deployment, or performance improvement is inferred from these repositories. Forks were not presented as original projects. The profile README’s placeholder email was omitted.
 
 ## Checks
 
