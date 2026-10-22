@@ -40,8 +40,8 @@ const portfolio = {
       description: "Run a language model in your browser and explore streamed text, time to first token, generation latency, and throughput.",
       challenge: "Make the responsiveness of LLM generation measurable across prompts and response modes.",
       approach: "The free demo runs quantized distilgpt2 with Transformers.js and ONNX in a browser worker. The repository also includes a Dockerized FastAPI service with streaming endpoints, benchmark scripts, and API and metric tests.",
-      outcome: "The browser demo performs real local inference and reports device-dependent timings. Historical Python server benchmarks are presented separately; the first browser visit downloads the model, and no paid inference backend is required.",
-      evidence: "Live browser inference, streaming metrics & server tests",
+      outcome: "The browser demo performs real local inference. A separate reproducible Python CPU baseline records 180 measured requests and 12 excluded warmups on an Apple M3 Pro, with raw results, model revision, runtime metadata and hashes. Browser and server timing boundaries remain distinct; the baseline is not a production performance guarantee.",
+      evidence: "180-request CPU baseline · live inference & raw results",
       repository: "https://github.com/SatyamPalkar/Latency-Fine-Tuning",
       url: "https://satyampalkar.github.io/Latency-Fine-Tuning/",
     },
@@ -64,13 +64,14 @@ const portfolio = {
       category: "analytics",
       cover: "pipeline",
       discipline: "Data integration & analytical modeling",
-      technologies: ["Airflow", "dbt", "PostgreSQL", "Python", "GCP"],
-      description: "Connecting Airbnb listings with Australian Census data to explore rental markets in their demographic context.",
+      technologies: ["Python", "SQL", "SQLite", "JavaScript", "Data quality"],
+      description: "Explore 12 months of historical NSW listing snapshots alongside Census context through an interactive, reproducible market dashboard.",
       challenge: "Bring separate listing and Census datasets into a consistent foundation for local market analysis.",
-      approach: "An ELT pipeline combines Airflow orchestration, dbt transformations, and PostgreSQL. Bronze, silver, and gold layers separate raw ingestion, cleaning, and analytical models, with source files staged in Google Cloud Storage.",
-      outcome: "The repository includes LGA summaries, monthly listing facts, SQL analysis, and exported datasets for reporting.",
-      evidence: "ELT pipeline, analytical tables & SQL reports",
+      approach: "A verified Python/SQLite bronze-to-gold workflow validates snapshot dates and prices, enforces listing-month uniqueness, joins explicit LGA codes to 2016 Census data, and exports anonymous aggregates. The dashboard supports month, LGA and room-type filters. Original Airflow/dbt coursework remains as architecture reference.",
+      outcome: "412,122 source rows reconcile to 407,330 accepted observations across 29 LGAs. The pipeline rejects 4,780 misdated rows and 12 invalid prices, and the repository includes three SQL-reproducible findings plus source hashes. Advertised prices are not revenue; pandemic-era snapshots are not current market estimates.",
+      evidence: "407,330 validated observations · SQL findings & live dashboard",
       repository: "https://github.com/SatyamPalkar/Airbnb-Census-Data-Integration-Pipeline",
+      url: "https://satyampalkar.github.io/Airbnb-Census-Data-Integration-Pipeline/",
     },
     {
       title: "NYC Taxi: Patterns & Prediction",
@@ -127,6 +128,13 @@ const portfolio = {
     ...additionalProjects,
   ],
 };
+
+// Lead with the two complete, evidence-backed flagship projects.
+const featuredOrder = ["LLM Inference & Latency", "Airbnb × Census", "Muse EEG Dashboard", "Job Portal Workspace"];
+portfolio.projects.sort((a, b) => {
+  const rank = project => featuredOrder.includes(project.title) ? featuredOrder.indexOf(project.title) : featuredOrder.length;
+  return rank(a) - rank(b);
+});
 
 const $ = (selector) => document.querySelector(selector);
 const dialog = $("#project-dialog");

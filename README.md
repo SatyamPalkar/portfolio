@@ -15,7 +15,8 @@ The LLM project detail links to the live browser inference demo; its measurement
 are performed on the visitor's device. The repository retains the Python server
 and its separate benchmark implementation.
 
-Muse, LLM Latency and Job Portal appear first, with direct demo and source links
+Latency Lab and the completed Airbnb/Census analytics edition lead the project
+catalog, followed by Muse and Job Portal, with direct demo and source links
 on their cards and in project details. Muse uses the original animated dashboard
 preview from `Muse-web` (`docs/images/dashboard-demo.gif`, branch `version_2.4`),
 copied into `assets/muse-dashboard.gif`. The complete GIF fits inside the card
