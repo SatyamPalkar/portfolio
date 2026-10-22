@@ -1,5 +1,7 @@
 # Satyam Palkar — Data & Machine Learning
 
+**[View live portfolio →](https://satyampalkar.github.io/portfolio/)**
+
 A portfolio for Satyam Palkar’s work in data analysis and machine learning, with responsive layouts, category filters, project details, technology lists, and GitHub links. The cream, green, and terracotta visual style is built with plain HTML, CSS, and JavaScript; no dependencies or build step.
 
 ## GitHub Pages
