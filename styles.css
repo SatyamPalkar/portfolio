@@ -88,6 +88,22 @@ h2 { font-weight: 400; font-size: clamp(38px, 4vw, 58px); line-height: 1.12; let
 .case-study-prompt { display: inline-block; align-self: start; font-size: 15px; color: var(--green); padding-block: 8px; }
 .project-source-link { display: inline-block; font-size: 15px; padding-block: 8px; min-height: 44px; color: var(--muted); text-decoration: underline; text-underline-offset: 5px; }
 .project-source-link:hover { color: var(--green); }
+.project-search { display: grid; gap: 10px; margin: 0 0 30px; }
+.project-search label { font-size: 15px; color: var(--green); }
+.project-search input { width: 100%; max-width: 620px; border: 1px solid var(--line); border-radius: 8px; background: transparent; padding: 14px 16px; color: var(--ink); font: inherit; font-size: 17px; }
+#filter-status { margin: 0; font-size: 14px; color: var(--muted); }
+.projects-empty { padding: 32px 0; font-size: 18px; color: var(--muted); }
+.cover-catalog { background: #dce4d4; padding: 28px; }
+.cover-catalog[data-category="ml"] { background: #e7c5b2; }
+.cover-catalog[data-category="ai"] { background: #d0ddd8; }
+.cover-catalog[data-category="dev"] { background: #e4d9c5; }
+.cover-catalog[data-category="learning"] { background: #dce1d1; }
+.cover-catalog[data-category="planned"] { background: #e5e2da; }
+.catalog-art { width: 100%; color: var(--green); }
+.catalog-art small { display: block; font-size: 10px; letter-spacing: 1px; }
+.catalog-art strong { display: block; font-family: var(--serif); font-size: clamp(25px, 3vw, 42px); font-weight: 400; line-height: 1.1; margin: 15px 0; overflow-wrap: anywhere; }
+.catalog-art > span { font-size: 12px; color: var(--muted); }
+.project-compact .project-cover { aspect-ratio: 2.1; min-height: 240px; }
 .project-links { display: flex; align-items: center; flex-wrap: wrap; gap: 8px 24px; margin-top: 8px; }
 .project-live-link { display: inline-flex; align-items: center; min-height: 44px; padding: 8px 16px; border-radius: 24px; background: var(--green); color: var(--paper); font-size: 15px; }
 .project-live-link:hover { filter: brightness(1.15); }

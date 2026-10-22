@@ -124,6 +124,7 @@ const portfolio = {
       evidence: "PEGASUS training notebook & ROUGE evaluation",
       repository: "https://github.com/SatyamPalkar/Text-Summarizer",
     },
+    ...additionalProjects,
   ],
 };
 
@@ -146,10 +147,13 @@ function safeUrl(value) {
 }
 
 // Decorative project illustrations, not screenshots or measured results.
-function coverArt(cover) {
+function coverArt(cover, project) {
   const art = element("div", "cover-art");
   art.setAttribute("aria-hidden", "true");
-  if (cover === "pipeline") {
+  if (cover === "catalog") {
+    art.classList.add("catalog-art");
+    art.append(element("small", "", project.status.toUpperCase()), element("strong", "", project.title), element("span", "", project.technologies.slice(0, 2).join(" / ")));
+  } else if (cover === "pipeline") {
     art.classList.add("pipeline-art");
     for (const [number, name, caption] of [["01", "Bronze", "Ingest & preserve"], ["02", "Silver", "Clean & connect"], ["03", "Gold", "Model & understand"]]) {
       const stage = element("div", "pipeline-stage");
@@ -208,6 +212,13 @@ function showProject(project, trigger) {
   const title = element("h2", "", project.title);
   title.id = "dialog-title";
   content.append(title, element("span", "dialog-tag", project.sample ? "Sample project · Replace with your work" : project.discipline), element("p", "", project.description));
+  if (project.upstream) {
+    const source = element("a", "text-link repository-link", `Forked from ${project.upstream} ↗`);
+    source.href = `https://github.com/${project.upstream}`;
+    source.target = "_blank";
+    source.rel = "noopener noreferrer";
+    content.append(source);
+  }
   if (project.technologies?.length) {
     const tags = element("div", "project-technologies");
     tags.setAttribute("aria-label", "Project technologies");
@@ -275,12 +286,14 @@ if (portfolio.email && /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(portfolio.email)) {
 portfolio.projects.forEach((project) => {
   const article = element("article", "project");
   article.dataset.category = project.category;
+  if (project.compact) article.classList.add("project-compact");
   const button = element("button", "project-button");
   button.type = "button";
   button.setAttribute("aria-haspopup", "dialog");
   button.setAttribute("aria-label", `Read about ${project.title}`);
-  const coverType = ["pipeline", "taxi", "forecast", "vision", "language", "latency", "portal", "muse"].includes(project.cover) ? project.cover : "latency";
+  const coverType = ["pipeline", "taxi", "forecast", "vision", "language", "latency", "portal", "muse", "catalog"].includes(project.cover) ? project.cover : "latency";
   const cover = element("div", `project-cover cover-${coverType}`);
+  cover.dataset.category = project.category;
   if (project.sample) cover.append(element("span", "sample-label", "SAMPLE PROJECT"));
   if (project.image && safeUrl(project.image)) {
     const img = element("img");
@@ -290,7 +303,7 @@ portfolio.projects.forEach((project) => {
     img.decoding = "async";
     img.className = "project-preview";
     cover.append(img);
-  } else cover.append(coverArt(coverType));
+  } else cover.append(coverArt(coverType, project));
   const meta = element("div", "project-meta");
   const details = element("div");
   details.append(element("h3", "", project.title), element("p", "", project.discipline));
@@ -333,7 +346,22 @@ portfolio.projects.forEach((project) => {
   $("#projects").append(article);
 });
 
+let activeFilter = "all";
+function filterProjects() {
+  const query = $("#project-search").value.trim().toLowerCase();
+  let count = 0;
+  document.querySelectorAll(".project").forEach((article, index) => {
+    const project = portfolio.projects[index];
+    const categoryMatch = activeFilter === "all" || (activeFilter === "live" ? Boolean(project.url) : project.category === activeFilter);
+    const textMatch = [project.title, project.description, project.repository, project.status || "", ...project.technologies].join(" ").toLowerCase().includes(query);
+    article.hidden = !categoryMatch || !textMatch;
+    if (!article.hidden) count++;
+  });
+  $("#filter-status").textContent = `${count} of ${portfolio.projects.length} repositories shown.`;
+  $("#projects-empty").hidden = count !== 0;
+}
 $("[data-filter='all'] span").textContent = String(portfolio.projects.length).padStart(2, "0");
+$("#project-search").addEventListener("input", filterProjects);
 document.querySelectorAll("[data-filter]").forEach((button) => {
   button.addEventListener("click", () => {
     document.querySelectorAll("[data-filter]").forEach((filter) => {
@@ -341,14 +369,11 @@ document.querySelectorAll("[data-filter]").forEach((button) => {
       filter.classList.toggle("active", active);
       filter.setAttribute("aria-pressed", String(active));
     });
-    let count = 0;
-    document.querySelectorAll(".project").forEach((project) => {
-      project.hidden = button.dataset.filter !== "all" && project.dataset.category !== button.dataset.filter;
-      if (!project.hidden) count++;
-    });
-    $("#filter-status").textContent = `${count} project${count === 1 ? "" : "s"} shown.`;
+    activeFilter = button.dataset.filter;
+    filterProjects();
   });
 });
+filterProjects();
 
 $(".close-dialog").addEventListener("click", () => dialog.close());
 dialog.addEventListener("click", (event) => {

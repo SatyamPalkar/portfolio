@@ -26,6 +26,22 @@ Job Portal is the browser-local workspace edition, with rule-based keyword
 coverage. Muse's animation is a recorded walkthrough, not proof that hardware is
 connected to the deployed dashboard.
 
+## Complete public project catalog
+
+The site has one card for each of the 29 public repositories reviewed on
+22 October 2026. The original eight project case studies remain first; additional
+project content lives in `projects.js`. This includes six attributed forks,
+learning/documentation repositories, the portfolio itself, and four clearly
+labelled empty/scaffold repositories. Private repositories are not listed.
+
+Search matches titles, descriptions, repository names, technologies and status.
+Category filters and a Live demos filter combine with search. Each card opens a
+detail dialog and links to its repository; fork dialogs include their upstream
+source. A repository card is not a claim that an unfinished project is deployed.
+The catalog is a reviewed snapshot, not a browser request to the GitHub API; add
+new repositories to `projects.js` when needed. Update the asset version suffixes
+in `index.html` when changing scripts or styles to avoid stale browser caches.
+
 ## Preview
 
 From this folder, run:
@@ -38,7 +54,7 @@ Open http://127.0.0.1:5173. Stop with Ctrl+C. You can also open `index.html` dir
 
 ## Make it yours
 
-- **Content:** edit the `portfolio` object at the top of `portfolio.js` to update your name, introduction, about text, interests, skills, email, and projects.
+- **Content:** edit the `portfolio` object at the top of `portfolio.js` to update your name, introduction, about text, interests, skills, email, and featured projects. Additional repository cards live in `projects.js`.
 - **Projects:** edit each project’s title, discipline, description, challenge, approach, outcome, technologies, and repository URL. Optionally add an `image`, `imageAlt`, or live demo `url`. Put local images in a new `assets/` folder and use paths like `./assets/my-project.jpg`.
 - **Categories:** use `analytics`, `ml`, or `ai`, or update the filters in `index.html` to match your categories.
 - **Cover illustrations:** select `pipeline`, `taxi`, `forecast`, `vision`, `language`, or `latency` using the project’s `cover` field. The covers are decorative illustrations, not screenshots or measured results.

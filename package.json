@@ -6,6 +6,6 @@
   "scripts": {
     "dev": "node scripts/serve.mjs",
     "start": "node scripts/serve.mjs",
-    "check": "node --check portfolio.js && node --check scripts/serve.mjs"
+    "check": "node --check projects.js && node --check portfolio.js && node --check scripts/serve.mjs"
   }
 }
