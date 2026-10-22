@@ -16,6 +16,50 @@ const portfolio = {
   email: "",
   projects: [
     {
+      title: "Muse EEG Dashboard",
+      category: "ai",
+      cover: "muse",
+      image: "./assets/muse-dashboard.gif",
+      imageAlt: "Animated Muse dashboard showing EEG frequency bands, a stress timeline, and session controls.",
+      discipline: "EEG visualization & session analysis",
+      technologies: ["Next.js", "TypeScript", "Python", "XGBoost", "PyTorch"],
+      description: "An interactive dashboard for exploring EEG frequency bands, session trends, and experimental stress-analysis outputs.",
+      challenge: "Make changing brainwave signals and session-level analysis easier to inspect in one dashboard.",
+      approach: "A Next.js interface brings together brainwave charts, a stress timeline, connection status, and session controls. The Python project includes signal features, temporal analysis, and experimental XGBoost and neural-network components.",
+      outcome: "Explore the deployed dashboard and the original animated walkthrough. Real headset streaming depends on a connected Muse device and its ingestion backend; the hosted interface alone does not verify a live hardware connection or model accuracy.",
+      evidence: "Deployed EEG dashboard & animated walkthrough",
+      repository: "https://github.com/SatyamPalkar/Muse-web",
+      url: "https://muse-web-tgpk-hn8qjhvnf-saytams-projects-71ebe524.vercel.app/dashboard",
+    },
+    {
+      title: "LLM Inference & Latency",
+      category: "ai",
+      cover: "latency",
+      discipline: "Model serving & performance instrumentation",
+      technologies: ["Transformers.js", "ONNX", "FastAPI", "Docker", "Plotly"],
+      description: "Run a language model in your browser and explore streamed text, time to first token, generation latency, and throughput.",
+      challenge: "Make the responsiveness of LLM generation measurable across prompts and response modes.",
+      approach: "The free demo runs quantized distilgpt2 with Transformers.js and ONNX in a browser worker. The repository also includes a Dockerized FastAPI service with streaming endpoints, benchmark scripts, and API and metric tests.",
+      outcome: "The browser demo performs real local inference and reports device-dependent timings. Historical Python server benchmarks are presented separately; the first browser visit downloads the model, and no paid inference backend is required.",
+      evidence: "Live browser inference, streaming metrics & server tests",
+      repository: "https://github.com/SatyamPalkar/Latency-Fine-Tuning",
+      url: "https://satyampalkar.github.io/Latency-Fine-Tuning/",
+    },
+    {
+      title: "Job Portal Workspace",
+      category: "ai",
+      cover: "portal",
+      discipline: "Application tracking & resume comparison",
+      technologies: ["React", "TypeScript", "Tailwind CSS", "Vite", "FastAPI"],
+      description: "A browser workspace for saving job descriptions, comparing resume keywords, and tracking applications from saved role to offer.",
+      challenge: "Keep job opportunities, resume evidence, and application progress organized without requiring a paid backend.",
+      approach: "The React and TypeScript browser edition saves records locally, compares whole-word skill keywords, and provides application statuses, notes, TXT downloads, and validated JSON backups. The original server edition remains in the repository.",
+      outcome: "The deployed workspace supports real local data and keyword comparisons. It uses rule-based coverage rather than an AI hiring score; shared accounts, live job feeds, and AI optimization belong to the separate backend edition.",
+      evidence: "Live workspace, keyword comparison & backup export",
+      repository: "https://github.com/SatyamPalkar/job-portal",
+      url: "https://satyampalkar.github.io/job-portal/",
+    },
+    {
       title: "Airbnb × Census",
       category: "analytics",
       cover: "pipeline",
@@ -80,20 +124,6 @@ const portfolio = {
       evidence: "PEGASUS training notebook & ROUGE evaluation",
       repository: "https://github.com/SatyamPalkar/Text-Summarizer",
     },
-    {
-      title: "LLM Inference & Latency",
-      category: "ai",
-      cover: "latency",
-      discipline: "Model serving & performance instrumentation",
-      technologies: ["FastAPI", "Hugging Face", "Docker", "Plotly", "pytest"],
-      description: "A local inference platform for measuring time to first token, generation latency, and throughput.",
-      challenge: "Make the responsiveness of local LLM generation measurable across prompts and response modes.",
-      approach: "A Dockerized FastAPI service exposes streaming and non-streaming generation. Benchmark scripts collect request-level measurements, while Plotly dashboards make timing and throughput comparisons explorable.",
-      outcome: "The project includes a live prompt interface, saved benchmark analysis, and API and metric tests. Its published benchmark snapshot is a small local sample; LoRA fine-tuning is listed as future work.",
-      evidence: "Streaming API, latency dashboard & tests",
-      repository: "https://github.com/SatyamPalkar/Latency-Fine-Tuning",
-      url: "https://satyampalkar.github.io/Latency-Fine-Tuning/",
-    },
   ],
 };
 
@@ -148,6 +178,12 @@ function coverArt(cover) {
       }
     }
     art.append(pixels, element("strong", "", "Pixels → patterns"), element("small", "", "CUSTOM CNN / MOBILENETV2"));
+  } else if (cover === "portal") {
+    art.classList.add("portal-art");
+    art.append(element("small", "", "YOUR NEXT CHAPTER, ORGANIZED"), element("strong", "", "A clearer\nnext move."));
+    const stages = element("div", "portal-stages");
+    for (const stage of ["Saved", "Applied", "Interview"]) stages.append(element("span", "", stage));
+    art.append(stages);
   } else if (cover === "language") {
     art.classList.add("language-art");
     const source = element("div", "language-card source-card");
@@ -182,7 +218,7 @@ function showProject(project, trigger) {
     if (value) content.append(element("h3", "", heading), element("p", "", value));
   }
   if (project.url && safeUrl(project.url)) {
-    const link = element("a", "text-link", "Visit project ↗");
+    const link = element("a", "text-link", "Open live demo ↗");
     link.href = safeUrl(project.url);
     link.target = "_blank";
     link.rel = "noopener noreferrer";
@@ -243,7 +279,7 @@ portfolio.projects.forEach((project) => {
   button.type = "button";
   button.setAttribute("aria-haspopup", "dialog");
   button.setAttribute("aria-label", `Read about ${project.title}`);
-  const coverType = ["pipeline", "taxi", "forecast", "vision", "language", "latency"].includes(project.cover) ? project.cover : "latency";
+  const coverType = ["pipeline", "taxi", "forecast", "vision", "language", "latency", "portal", "muse"].includes(project.cover) ? project.cover : "latency";
   const cover = element("div", `project-cover cover-${coverType}`);
   if (project.sample) cover.append(element("span", "sample-label", "SAMPLE PROJECT"));
   if (project.image && safeUrl(project.image)) {
@@ -251,7 +287,8 @@ portfolio.projects.forEach((project) => {
     img.src = safeUrl(project.image);
     img.alt = project.imageAlt || project.title;
     img.loading = "lazy";
-    img.style.cssText = "width:100%;height:100%;object-fit:cover;position:absolute;inset:0";
+    img.decoding = "async";
+    img.className = "project-preview";
     cover.append(img);
   } else cover.append(coverArt(coverType));
   const meta = element("div", "project-meta");
@@ -275,14 +312,24 @@ portfolio.projects.forEach((project) => {
   button.append(element("span", "case-study-prompt", "View project details ↗"));
   button.addEventListener("click", () => showProject(project, button));
   article.append(button);
+  const links = element("div", "project-links");
+  if (project.url && safeUrl(project.url)) {
+    const live = element("a", "project-live-link", "Live demo ↗");
+    live.href = safeUrl(project.url);
+    live.target = "_blank";
+    live.rel = "noopener noreferrer";
+    live.setAttribute("aria-label", `Open ${project.title} live demo`);
+    links.append(live);
+  }
   if (project.repository && safeUrl(project.repository)) {
     const source = element("a", "project-source-link", "GitHub repository ↗");
     source.href = safeUrl(project.repository);
     source.target = "_blank";
     source.rel = "noopener noreferrer";
     source.setAttribute("aria-label", `Open ${project.title} on GitHub`);
-    article.append(source);
+    links.append(source);
   }
+  article.append(links);
   $("#projects").append(article);
 });
 

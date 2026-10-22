@@ -13,6 +13,17 @@ The LLM project detail links to the live browser inference demo; its measurement
 are performed on the visitor's device. The repository retains the Python server
 and its separate benchmark implementation.
 
+Muse, LLM Latency and Job Portal appear first, with direct demo and source links
+on their cards and in project details. Muse uses the original animated dashboard
+preview from `Muse-web` (`docs/images/dashboard-demo.gif`, branch `version_2.4`),
+copied into `assets/muse-dashboard.gif`. The complete GIF fits inside the card
+without cropping the dashboard. Muse's supplied dashboard link is a specific
+Vercel deployment URL; update its `url` if that deployment is replaced.
+
+Job Portal is the browser-local workspace edition, with rule-based keyword
+coverage. Muse's animation is a recorded walkthrough, not proof that hardware is
+connected to the deployed dashboard.
+
 ## Preview
 
 From this folder, run:
