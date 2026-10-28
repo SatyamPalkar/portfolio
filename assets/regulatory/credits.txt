@@ -1,0 +1,20 @@
+Australian Regulatory AI Assistant — concept trailer
+Project: Satyam Palkar
+Source: https://github.com/SatyamPalkar/Australian-Regulatory-AI-Assistant
+
+Music: Sascha Ende, ende.app (CC BY 4.0)
+Track: Happy Beats / Business Moves, Vol. 12
+Source: https://ende.app/en
+License: https://ende.app/en/standard-license
+Changes: 24-second excerpt, adjusted level, fade-in and fade-out.
+
+Sound effects: Kenney interface/impact sounds (CC0), supplied with BRAG.
+Created using BRAG: https://github.com/latent-spaces/brag
+Animation and rendering: Hyperframes / GSAP.
+
+The UI sequence is reconstructed and condensed for a concept trailer.
+The plain-language answer shown is a prepared, source-linked guide, not a
+LoRA-generated answer. Research prototype using a statutory snapshot.
+The explanatory adapter remains experimental; factual accuracy and citation
+entailment have not been independently graded. Local MLX inference requires
+the Mac backend; GitHub Pages provides a browser-only retrieval demo.

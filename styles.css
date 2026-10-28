@@ -285,3 +285,21 @@ dialog h3 { font-size: 19px; font-weight: 550; margin: 25px 0 6px; }
   html { scroll-behavior: auto; }
   *, *::before, *::after { transition: none !important; }
 }
+
+/* Regulatory project: retain the film's full frame and play only on request. */
+.cover-regulatory { background: #090b0c; }
+.cover-regulatory .project-preview { width: 100%; height: 100%; object-fit: contain; }
+.film-badge { position: absolute; left: 18px; bottom: 18px; padding: 9px 13px; border-radius: 20px; background: #d3f49d; color: #17221b; font-size: 13px; font-weight: 600; }
+.project-trailer-link { color: var(--green); font: inherit; font-size: 15px; background: none; border: 0; border-bottom: 1px solid currentColor; padding: 7px 0; cursor: pointer; }
+.project-trailer-link:focus-visible { outline: 2px solid var(--green); outline-offset: 5px; }
+.dialog-with-video { width: min(960px, calc(100% - 32px)); }
+.dialog-with-video h2 { font-size: clamp(25px, 4vw, 38px); line-height: 1.2; }
+.project-film { margin: 24px 0; }
+.project-video { display: block; width: 100%; aspect-ratio: 16 / 9; object-fit: contain; background: #090b0c; border-radius: 12px; }
+.project-film figcaption, .film-credits { display: block; font-size: 14px; line-height: 1.7; color: var(--muted); margin-top: 12px; }
+.film-credits { color: var(--green); text-underline-offset: 4px; }
+.film-transcript { margin-top: 14px; }
+.film-transcript summary { font-size: 15px; color: var(--green); cursor: pointer; }
+.film-transcript p { font-size: 15px; line-height: 1.7; }
+.project-resources { margin: 22px 0; }
+@media (max-width: 700px) { .dialog-with-video { padding: 22px; } .film-badge { left: 12px; bottom: 12px; font-size: 12px; } }

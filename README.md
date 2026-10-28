@@ -15,7 +15,7 @@ The LLM project detail links to the live browser inference demo; its measurement
 are performed on the visitor's device. The repository retains the Python server
 and its separate benchmark implementation.
 
-Latency Lab and the completed Airbnb/Census analytics edition lead the project
+Regulatory AI, Latency Lab and the completed Airbnb/Census analytics edition lead the project
 catalog, followed by Muse and Job Portal, with direct demo and source links
 on their cards and in project details. Muse uses the original animated dashboard
 preview from `Muse-web` (`docs/images/dashboard-demo.gif`, branch `version_2.4`),
@@ -29,8 +29,9 @@ connected to the deployed dashboard.
 
 ## Complete public project catalog
 
-The site has one card for each of the 29 public repositories reviewed on
-22 October 2026. The original eight project case studies remain first; additional
+The site contains 30 project cards: the 29 repositories reviewed on
+22 October 2026 plus Australian Regulatory AI Assistant added on 28 October 2026.
+The nine featured project case studies remain first; additional
 project content lives in `projects.js`. This includes six attributed forks,
 learning/documentation repositories, the portfolio itself, and four clearly
 labelled empty/scaffold repositories. Private repositories are not listed.
@@ -89,3 +90,25 @@ The development server is for local preview. The website itself can be hosted as
 The opening states the role and core technologies, followed by skill groups linked to filtered projects. Project cards expose deliverables, technology keywords, and direct repository links. Main descriptions use 17–20px text; supporting labels and technology tags use 13–16px. The cream, green, and terracotta palette and illustration style remain consistent.
 
 This structure applies [NN/g’s guidance on descriptive headings and scanning](https://www.nngroup.com/articles/layer-cake-pattern-scanning/) and [Indeed’s portfolio guidance on relevant skills, clear case studies, and work evidence](https://ca.indeed.com/career-advice/finding-a-job/how-to-make-a-portfolio). These are design choices to make the work easier to assess, not a tested prediction of hiring outcomes.
+
+## Australian Regulatory AI Assistant
+
+The leading Applied AI case study includes a 24-second concept trailer, native
+video controls, a text transcript, source/demo links, and a 36-page architecture
+and evaluation handbook. The public demo runs browser TF-IDF retrieval; local
+MLX inference requires the Mac backend. Response and citation checks are not
+presented as legal accuracy. The explanatory adapter remains experimental.
+
+Only four finished assets are included in `assets/regulatory/`:
+
+- `concept-trailer.mp4`: finalized 1080p composition, with the poster baked into frame 0.
+- `poster.jpg`: lightweight card and video poster.
+- `architecture-evaluation.pdf`: full technical handbook.
+- `credits.txt`: music/SFX credits, licenses and concept-sequence context.
+
+Model weights, raw datasets, adapters, Python environments, render dependencies,
+intermediate frames and training logs remain in the source project. Video uses
+`preload="none"`, does not autoplay, and pauses when its dialog closes.
+
+Music: Sascha Ende, ende.app (CC BY 4.0), https://ende.app/en/standard-license
+(24-second excerpt, level adjusted and faded). Workflow: https://github.com/latent-spaces/brag.

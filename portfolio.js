@@ -16,6 +16,28 @@ const portfolio = {
   email: "",
   projects: [
     {
+      title: "Australian Regulatory AI Assistant",
+      category: "ai",
+      status: "Research prototype",
+      cover: "regulatory",
+      image: "./assets/regulatory/poster.jpg",
+      imageAlt: "Regulatory project: Ask freely. Follow the evidence. Dark interface with lime accents.",
+      video: "./assets/regulatory/concept-trailer.mp4",
+      videoPoster: "./assets/regulatory/poster.jpg",
+      videoCredits: "./assets/regulatory/credits.txt",
+      videoTranscript: "0–3 s: Complex rules. Clearer thinking. 3–9 s: A question about the supplier’s right to sell goods is entered in the research workspace. 9–15 s: A prepared plain-language guide explains the title guarantee and opens Australian Consumer Law section 51. 15–20 s: The local stack is shown: 37 statutory sections, 93 retrieval passages, MLX + LoRA; the explanatory adapter is marked experimental. 20–24 s: Regulatory. Ask freely. Follow the evidence. Research prototype; statutory snapshot.",
+      resources: [{ label: "Architecture & evaluation handbook (PDF, 36 pages)", url: "./assets/regulatory/architecture-evaluation.pdf" }],
+      discipline: "Local RAG · LoRA experiments · Source-linked answers",
+      technologies: ["Python", "FastAPI", "MLX", "LoRA", "Sentence Transformers", "React"],
+      description: "An Australian consumer-law research assistant connecting questions to statutory evidence, with local model generation, cited sources, and transparent evaluation reports.",
+      challenge: "Make regulatory text easier to investigate while keeping source versions, unsupported questions and the limits of small-model explanations visible.",
+      approach: "A pinned Hugging Face legislation snapshot supplies 37 statutory sections and 93 retrieval chunks. TF-IDF and MiniLM embeddings are fused, then cross-encoder reranking selects evidence for a local four-bit Qwen model with an MLX LoRA adapter. FastAPI serves the interface; bounded follow-ups retrieve fresh evidence and use source quotations or snapshot-pinned prepared guides.",
+      outcome: "In the saved 36-question comparison, LoRA + RAG accepted responses for 20 of 24 supported questions versus 17 of 24 for the base model; both declined all 12 unsupported questions. These are automated response/source checks, not factual-accuracy scores. Source review kept the expanded explanatory adapter experimental. The public demo runs browser retrieval; model inference requires the local Mac backend.",
+      evidence: "24-second concept trailer · 36-page technical handbook · frozen evaluation reports",
+      repository: "https://github.com/SatyamPalkar/Australian-Regulatory-AI-Assistant",
+      url: "https://satyampalkar.github.io/Australian-Regulatory-AI-Assistant/",
+    },
+    {
       title: "Muse EEG Dashboard",
       category: "ai",
       cover: "muse",
@@ -131,8 +153,8 @@ const portfolio = {
   ],
 };
 
-// Lead with the two complete, evidence-backed flagship projects.
-const featuredOrder = ["LLM Inference & Latency", "Airbnb × Census", "Muse EEG Dashboard", "Job Portal Workspace"];
+// Lead with featured projects and their reviewable evidence.
+const featuredOrder = ["Australian Regulatory AI Assistant", "LLM Inference & Latency", "Airbnb × Census", "Muse EEG Dashboard", "Job Portal Workspace"];
 portfolio.projects.sort((a, b) => {
   const rank = project => featuredOrder.includes(project.title) ? featuredOrder.indexOf(project.title) : featuredOrder.length;
   return rank(a) - rank(b);
@@ -218,10 +240,52 @@ function coverArt(cover, project) {
 function showProject(project, trigger) {
   lastProjectButton = trigger;
   const content = $("#dialog-content");
+  dialog.classList.toggle("dialog-with-video", Boolean(project.video));
   content.replaceChildren();
   const title = element("h2", "", project.title);
   title.id = "dialog-title";
   content.append(title, element("span", "dialog-tag", project.sample ? "Sample project · Replace with your work" : project.discipline), element("p", "", project.description));
+  if (project.video && safeUrl(project.video)) {
+    const figure = element("figure", "project-film");
+    const video = element("video", "project-video");
+    video.src = safeUrl(project.video);
+    if (safeUrl(project.videoPoster)) video.poster = safeUrl(project.videoPoster);
+    video.controls = true;
+    video.preload = "none";
+    video.playsInline = true;
+    video.setAttribute("aria-label", `${project.title}: 24-second concept trailer, music only`);
+    video.setAttribute("tabindex", "0");
+    const fallback = element("a", "", "Download the concept trailer (MP4)");
+    fallback.href = safeUrl(project.video);
+    video.append(fallback);
+    const caption = element("figcaption", "", "24-second concept trailer · 1080p · music only. Condensed UI sequence; the explanation shown is a prepared source-linked guide, not a model-generated answer.");
+    figure.append(video, caption);
+    if (project.videoCredits && safeUrl(project.videoCredits)) {
+      const credits = element("a", "film-credits", "Music: Sascha Ende, ende.app (CC BY 4.0) · credits ↗");
+      credits.href = safeUrl(project.videoCredits);
+      credits.target = "_blank";
+      credits.rel = "noopener noreferrer";
+      figure.append(credits);
+    }
+    if (project.videoTranscript) {
+      const transcript = element("details", "film-transcript");
+      transcript.append(element("summary", "", "Read the trailer transcript"), element("p", "", project.videoTranscript));
+      figure.append(transcript);
+    }
+    content.append(figure);
+  }
+  if (project.resources?.length) {
+    const resources = element("div", "project-resources");
+    for (const resource of project.resources) {
+      if (!safeUrl(resource.url)) continue;
+      const link = element("a", "text-link", `${resource.label} ↗`);
+      link.href = safeUrl(resource.url);
+      link.target = "_blank";
+      link.rel = "noopener noreferrer";
+      resources.append(link);
+    }
+    content.append(resources);
+  }
   if (project.upstream) {
     const source = element("a", "text-link repository-link", `Forked from ${project.upstream} ↗`);
     source.href = `https://github.com/${project.upstream}`;
@@ -301,7 +365,7 @@ portfolio.projects.forEach((project) => {
   button.type = "button";
   button.setAttribute("aria-haspopup", "dialog");
   button.setAttribute("aria-label", `Read about ${project.title}`);
-  const coverType = ["pipeline", "taxi", "forecast", "vision", "language", "latency", "portal", "muse", "catalog"].includes(project.cover) ? project.cover : "latency";
+  const coverType = ["pipeline", "taxi", "forecast", "vision", "language", "latency", "portal", "muse", "catalog", "regulatory"].includes(project.cover) ? project.cover : "latency";
   const cover = element("div", `project-cover cover-${coverType}`);
   cover.dataset.category = project.category;
   if (project.sample) cover.append(element("span", "sample-label", "SAMPLE PROJECT"));
@@ -314,6 +378,7 @@ portfolio.projects.forEach((project) => {
     img.className = "project-preview";
     cover.append(img);
   } else cover.append(coverArt(coverType, project));
+  if (project.video) cover.append(element("span", "film-badge", "▶ 24s concept trailer"));
   const meta = element("div", "project-meta");
   const details = element("div");
   details.append(element("h3", "", project.title), element("p", "", project.discipline));
@@ -332,7 +397,7 @@ portfolio.projects.forEach((project) => {
     evidence.append(element("strong", "", "Deliverables"), document.createTextNode(project.evidence));
     button.append(evidence);
   }
-  button.append(element("span", "case-study-prompt", "View project details ↗"));
+  button.append(element("span", "case-study-prompt", project.video ? "Watch trailer & view project ↗" : "View project details ↗"));
   button.addEventListener("click", () => showProject(project, button));
   article.append(button);
   const links = element("div", "project-links");
@@ -351,6 +416,22 @@ portfolio.projects.forEach((project) => {
     source.rel = "noopener noreferrer";
     source.setAttribute("aria-label", `Open ${project.title} on GitHub`);
     links.append(source);
+  }
+  if (project.video && safeUrl(project.video)) {
+    const watch = element("button", "project-trailer-link", "Watch concept trailer ▶");
+    watch.type = "button";
+    watch.addEventListener("click", () => showProject(project, watch));
+    links.prepend(watch);
+  }
+  if (project.resources?.length) {
+    const resource = project.resources[0];
+    if (safeUrl(resource.url)) {
+      const link = element("a", "project-source-link", "Technical handbook (PDF) ↗");
+      link.href = safeUrl(resource.url);
+      link.target = "_blank";
+      link.rel = "noopener noreferrer";
+      links.append(link);
+    }
   }
   article.append(links);
   $("#projects").append(article);
@@ -391,6 +472,7 @@ dialog.addEventListener("click", (event) => {
   if (event.target === dialog && (event.clientX < rect.left || event.clientX > rect.right || event.clientY < rect.top || event.clientY > rect.bottom)) dialog.close();
 });
 dialog.addEventListener("close", () => {
+  dialog.querySelectorAll("video").forEach(video => video.pause());
   document.body.classList.remove("dialog-open");
   lastProjectButton?.focus();
 });
