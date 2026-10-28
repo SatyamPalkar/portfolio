@@ -301,5 +301,4 @@ dialog h3 { font-size: 19px; font-weight: 550; margin: 25px 0 6px; }
 .film-transcript { margin-top: 14px; }
 .film-transcript summary { font-size: 15px; color: var(--green); cursor: pointer; }
 .film-transcript p { font-size: 15px; line-height: 1.7; }
-.project-resources { margin: 22px 0; }
 @media (max-width: 700px) { .dialog-with-video { padding: 22px; } .film-badge { left: 12px; bottom: 12px; font-size: 12px; } }

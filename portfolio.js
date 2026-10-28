@@ -26,14 +26,13 @@ const portfolio = {
       videoPoster: "./assets/regulatory/poster.jpg",
       videoCredits: "./assets/regulatory/credits.txt",
       videoTranscript: "0–3 s: Complex rules. Clearer thinking. 3–9 s: A question about the supplier’s right to sell goods is entered in the research workspace. 9–15 s: A prepared plain-language guide explains the title guarantee and opens Australian Consumer Law section 51. 15–20 s: The local stack is shown: 37 statutory sections, 93 retrieval passages, MLX + LoRA; the explanatory adapter is marked experimental. 20–24 s: Regulatory. Ask freely. Follow the evidence. Research prototype; statutory snapshot.",
-      resources: [{ label: "Architecture & evaluation handbook (PDF, 36 pages)", url: "./assets/regulatory/architecture-evaluation.pdf" }],
       discipline: "Local RAG · LoRA experiments · Source-linked answers",
       technologies: ["Python", "FastAPI", "MLX", "LoRA", "Sentence Transformers", "React"],
       description: "An Australian consumer-law research assistant connecting questions to statutory evidence, with local model generation, cited sources, and transparent evaluation reports.",
       challenge: "Make regulatory text easier to investigate while keeping source versions, unsupported questions and the limits of small-model explanations visible.",
       approach: "A pinned Hugging Face legislation snapshot supplies 37 statutory sections and 93 retrieval chunks. TF-IDF and MiniLM embeddings are fused, then cross-encoder reranking selects evidence for a local four-bit Qwen model with an MLX LoRA adapter. FastAPI serves the interface; bounded follow-ups retrieve fresh evidence and use source quotations or snapshot-pinned prepared guides.",
       outcome: "In the saved 36-question comparison, LoRA + RAG accepted responses for 20 of 24 supported questions versus 17 of 24 for the base model; both declined all 12 unsupported questions. These are automated response/source checks, not factual-accuracy scores. Source review kept the expanded explanatory adapter experimental. The public demo runs browser retrieval; model inference requires the local Mac backend.",
-      evidence: "24-second concept trailer · 36-page technical handbook · frozen evaluation reports",
+      evidence: "24-second concept trailer · cited evidence · model experiments",
       repository: "https://github.com/SatyamPalkar/Australian-Regulatory-AI-Assistant",
       url: "https://satyampalkar.github.io/Australian-Regulatory-AI-Assistant/",
     },
@@ -274,18 +273,6 @@ function showProject(project, trigger) {
     }
     content.append(figure);
   }
-  if (project.resources?.length) {
-    const resources = element("div", "project-resources");
-    for (const resource of project.resources) {
-      if (!safeUrl(resource.url)) continue;
-      const link = element("a", "text-link", `${resource.label} ↗`);
-      link.href = safeUrl(resource.url);
-      link.target = "_blank";
-      link.rel = "noopener noreferrer";
-      resources.append(link);
-    }
-    content.append(resources);
-  }
   if (project.upstream) {
     const source = element("a", "text-link repository-link", `Forked from ${project.upstream} ↗`);
     source.href = `https://github.com/${project.upstream}`;
@@ -422,16 +409,6 @@ portfolio.projects.forEach((project) => {
     watch.type = "button";
     watch.addEventListener("click", () => showProject(project, watch));
     links.prepend(watch);
-  }
-  if (project.resources?.length) {
-    const resource = project.resources[0];
-    if (safeUrl(resource.url)) {
-      const link = element("a", "project-source-link", "Technical handbook (PDF) ↗");
-      link.href = safeUrl(resource.url);
-      link.target = "_blank";
-      link.rel = "noopener noreferrer";
-      links.append(link);
-    }
   }
   article.append(links);
   $("#projects").append(article);

@@ -94,16 +94,14 @@ This structure applies [NN/g’s guidance on descriptive headings and scanning](
 ## Australian Regulatory AI Assistant
 
 The leading Applied AI case study includes a 24-second concept trailer, native
-video controls, a text transcript, source/demo links, and a 36-page architecture
-and evaluation handbook. The public demo runs browser TF-IDF retrieval; local
+video controls, a text transcript, and source/demo links. The public demo runs browser TF-IDF retrieval; local
 MLX inference requires the Mac backend. Response and citation checks are not
 presented as legal accuracy. The explanatory adapter remains experimental.
 
-Only four finished assets are included in `assets/regulatory/`:
+Only three finished assets are included in `assets/regulatory/`:
 
 - `concept-trailer.mp4`: finalized 1080p composition, with the poster baked into frame 0.
 - `poster.jpg`: lightweight card and video poster.
-- `architecture-evaluation.pdf`: full technical handbook.
 - `credits.txt`: music/SFX credits, licenses and concept-sequence context.
 
 Model weights, raw datasets, adapters, Python environments, render dependencies,
