@@ -110,3 +110,16 @@ intermediate frames and training logs remain in the source project. Video uses
 
 Music: Sascha Ende, ende.app (CC BY 4.0), https://ende.app/en/standard-license
 (24-second excerpt, level adjusted and faded). Workflow: https://github.com/latent-spaces/brag.
+
+## Regulatory assistant 0.3.0 update
+
+The project now offers an optional Groq-hosted inference profile alongside local
+MLX/LoRA research. Its controller passed 32/32 development routing checks and
+22/22 conversation regression turns; 145 automated tests and eight live probes
+also passed. These synthetic checks do not measure independent legal accuracy.
+The public project link remains a browser retrieval demo. The Python API needs
+separate hosting; this portfolio does not contain an API key or host inference.
+
+The existing trailer illustrates the earlier local MLX profile. Private technical
+handbooks, internal architecture PDFs, local archives and credentials are excluded
+from the portfolio assets.
