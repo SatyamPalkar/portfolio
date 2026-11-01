@@ -94,8 +94,9 @@ This structure applies [NN/g’s guidance on descriptive headings and scanning](
 ## Australian Regulatory AI Assistant
 
 The leading Applied AI case study includes a 24-second concept trailer, native
-video controls, a text transcript, and source/demo links. The public demo runs browser TF-IDF retrieval; local
-MLX inference requires the Mac backend. Response and citation checks are not
+video controls, a text transcript, and source/demo links. The public demo connects
+GitHub Pages to a Groq-backed Render API with lightweight TF-IDF retrieval. The
+local hybrid/MLX profile remains separate. Response and citation checks are not
 presented as legal accuracy. The explanatory adapter remains experimental.
 
 Only three finished assets are included in `assets/regulatory/`:
@@ -115,10 +116,12 @@ Music: Sascha Ende, ende.app (CC BY 4.0), https://ende.app/en/standard-license
 
 The project now offers an optional Groq-hosted inference profile alongside local
 MLX/LoRA research. Its controller passed 32/32 development routing checks and
-22/22 conversation regression turns; 145 automated tests and eight live probes
-also passed. These synthetic checks do not measure independent legal accuracy.
-The public project link remains a browser retrieval demo. The Python API needs
-separate hosting; this portfolio does not contain an API key or host inference.
+22/22 conversation regression turns. The current suite has 157 passing automated
+tests, and the hosted lightweight profile passed seven live integration checks. These synthetic checks do not measure independent legal accuracy.
+The public project link now selects the Render-hosted Groq API by default. Its
+free profile disables embeddings and reranking, keeps citations and supported
+policy lookup, and can sleep when idle. The original browser-only mode remains
+selectable. This portfolio contains no API key and does not perform inference.
 
 The existing trailer illustrates the earlier local MLX profile. Private technical
 handbooks, internal architecture PDFs, local archives and credentials are excluded
