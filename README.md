@@ -116,7 +116,7 @@ Music: Sascha Ende, ende.app (CC BY 4.0), https://ende.app/en/standard-license
 
 The project now offers an optional Groq-hosted inference profile alongside local
 MLX/LoRA research. Its controller passed 32/32 development routing checks and
-22/22 conversation regression turns. The current suite has 157 passing automated
+22/22 conversation regression turns. The current suite has 158 passing automated
 tests, and the hosted lightweight profile passed seven live integration checks. These synthetic checks do not measure independent legal accuracy.
 The public project link now selects the Render-hosted Groq API by default. Its
 free profile disables embeddings and reranking, keeps citations and supported
