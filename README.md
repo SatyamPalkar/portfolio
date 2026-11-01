@@ -95,7 +95,7 @@ This structure applies [NN/g’s guidance on descriptive headings and scanning](
 
 The leading Applied AI case study includes a 24-second concept trailer, native
 video controls, a text transcript, and source/demo links. The public demo connects
-GitHub Pages to a Groq-backed Render API with lightweight TF-IDF retrieval. The
+GitHub Pages to a Groq-backed Render API with quantized CPU semantic embeddings and TF-IDF rank fusion. The
 local hybrid/MLX profile remains separate. Response and citation checks are not
 presented as legal accuracy. The explanatory adapter remains experimental.
 
@@ -116,8 +116,8 @@ Music: Sascha Ende, ende.app (CC BY 4.0), https://ende.app/en/standard-license
 
 The project now offers an optional Groq-hosted inference profile alongside local
 MLX/LoRA research. Its controller passed 32/32 development routing checks and
-22/22 conversation regression turns. The current suite has 158 passing automated
-tests, and the hosted lightweight profile passed seven live integration checks. These synthetic checks do not measure independent legal accuracy.
+22/22 conversation regression turns. The current suite has 165 passing automated
+tests, and the CPU semantic retriever passed 20/20 existing development checks. These synthetic checks do not measure independent legal accuracy.
 The public project link now selects the Render-hosted Groq API by default. Its
 free profile disables embeddings and reranking, keeps citations and supported
 policy lookup, and can sleep when idle. The original browser-only mode remains
