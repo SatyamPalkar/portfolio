@@ -81,6 +81,21 @@ const portfolio = {
       url: "https://satyampalkar.github.io/job-portal/",
     },
     {
+      title: "Olist Delivery Analytics",
+      category: "analytics",
+      cover: "pipeline",
+      image: "./assets/olist-dashboard.png",
+      imageAlt: "Dark-theme Tableau executive dashboard for Olist with KPI cards, sales and late-delivery trends, review score by delivery timing, and ranked category and state lists.",
+      discipline: "Tableau · SQL warehouse & delivery analytics",
+      technologies: ["SQL", "PostgreSQL", "Tableau", "Python", "pytest", "Data quality"],
+      description: "A four-page Tableau dashboard on 96,478 delivered Olist e-commerce orders that finds where and why deliveries run late, and which states, routes and sellers to fix first.",
+      challenge: "Sales grew 141% year on year (Jan-Aug 2018 vs 2017) while the late-delivery rate more than doubled, from 4.2% to 9.4%. The business needed to know whether the cause was products, places or the delivery network.",
+      approach: "Raw CSVs load into a tested PostgreSQL warehouse (raw, staging, analytics) with reconciled row counts and 129 passing tests. Single-grain extracts feed a Tableau workbook generated from code. A KPI contract fixes the scope to delivered orders, and the dashboard moves from status to drivers to action.",
+      outcome: "Late orders spent 25.7 days in carrier transit vs 7.9 for on-time orders, while seller dispatch differed by only 2.8 days, so about 86% of the extra delay is transit. Six states hold 1,176 excess late orders versus the 8.11% network rate, and Rio de Janeiro alone holds 663. Review scores fall from about 4.3 to about 1.7 when orders arrive more than a week late (association, not proven cause).",
+      evidence: "96,478 reconciled orders · 4 Tableau pages · 129 tests",
+      repository: "https://github.com/SatyamPalkar/Olist-Dashboard",
+    },
+    {
       title: "Airbnb × Census",
       category: "analytics",
       cover: "pipeline",
@@ -153,7 +168,7 @@ const portfolio = {
 };
 
 // Lead with featured projects and their reviewable evidence.
-const featuredOrder = ["Australian Regulatory AI Assistant", "LLM Inference & Latency", "Airbnb × Census", "Muse EEG Dashboard", "Job Portal Workspace"];
+const featuredOrder = ["Olist Delivery Analytics", "Australian Regulatory AI Assistant", "LLM Inference & Latency", "Airbnb × Census", "Muse EEG Dashboard", "Job Portal Workspace"];
 portfolio.projects.sort((a, b) => {
   const rank = project => featuredOrder.includes(project.title) ? featuredOrder.indexOf(project.title) : featuredOrder.length;
   return rank(a) - rank(b);

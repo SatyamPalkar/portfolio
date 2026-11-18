@@ -15,7 +15,7 @@ The LLM project detail links to the live browser inference demo; its measurement
 are performed on the visitor's device. The repository retains the Python server
 and its separate benchmark implementation.
 
-Regulatory AI, Latency Lab and the completed Airbnb/Census analytics edition lead the project
+Olist Delivery Analytics (Tableau), Regulatory AI, Latency Lab and the completed Airbnb/Census analytics edition lead the project
 catalog, followed by Muse and Job Portal, with direct demo and source links
 on their cards and in project details. Muse uses the original animated dashboard
 preview from `Muse-web` (`docs/images/dashboard-demo.gif`, branch `version_2.4`),
@@ -29,8 +29,9 @@ connected to the deployed dashboard.
 
 ## Complete public project catalog
 
-The site contains 30 project cards: the 29 repositories reviewed on
-22 October 2026 plus Australian Regulatory AI Assistant added on 28 October 2026.
+The site contains 31 project cards: the 29 repositories reviewed on
+22 October 2026, plus Australian Regulatory AI Assistant added on 28 October 2026
+and Olist Delivery Analytics (Tableau) added on 18 November 2026.
 The nine featured project case studies remain first; additional
 project content lives in `projects.js`. This includes six attributed forks,
 learning/documentation repositories, the portfolio itself, and four clearly
