@@ -31,7 +31,8 @@ connected to the deployed dashboard.
 
 The site contains 31 project cards: the 29 repositories reviewed on
 22 October 2026, plus Australian Regulatory AI Assistant added on 28 October 2026
-and Olist Delivery Analytics (Tableau) added on 18 November 2026.
+and Olist Delivery Analytics (Tableau) added on 18 November 2026. Its interactive
+web dashboard is hosted in `olist/` and served at `/portfolio/olist/`.
 The nine featured project case studies remain first; additional
 project content lives in `projects.js`. This includes six attributed forks,
 learning/documentation repositories, the portfolio itself, and four clearly

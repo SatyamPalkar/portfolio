@@ -92,8 +92,9 @@ const portfolio = {
       challenge: "Sales grew 141% year on year (Jan-Aug 2018 vs 2017) while the late-delivery rate more than doubled, from 4.2% to 9.4%. The business needed to know whether the cause was products, places or the delivery network.",
       approach: "Raw CSVs load into a tested PostgreSQL warehouse (raw, staging, analytics) with reconciled row counts and 129 passing tests. Single-grain extracts feed a Tableau workbook generated from code. A KPI contract fixes the scope to delivered orders, and the dashboard moves from status to drivers to action.",
       outcome: "Late orders spent 25.7 days in carrier transit vs 7.9 for on-time orders, while seller dispatch differed by only 2.8 days, so about 86% of the extra delay is transit. Six states hold 1,176 excess late orders versus the 8.11% network rate, and Rio de Janeiro alone holds 663. Review scores fall from about 4.3 to about 1.7 when orders arrive more than a week late (association, not proven cause).",
-      evidence: "96,478 reconciled orders · 4 Tableau pages · 129 tests",
+      evidence: "96,478 reconciled orders · live interactive dashboard · 129 tests",
       repository: "https://github.com/SatyamPalkar/Olist-Dashboard",
+      url: "https://satyampalkar.github.io/portfolio/olist/",
     },
     {
       title: "Airbnb × Census",

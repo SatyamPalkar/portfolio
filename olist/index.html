@@ -1,0 +1,165 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Olist Delivery Dashboard</title>
+  <meta name="description" content="Interactive four-page dashboard on Olist delivered orders: growth, delivery diagnostics, seller and fulfilment, and an action queue.">
+  <link rel="stylesheet" href="./style.css">
+  <script src="https://cdn.jsdelivr.net/npm/echarts@5.5.1/dist/echarts.min.js" defer></script>
+  <script src="./app.js" defer></script>
+</head>
+<body>
+  <a class="skip" href="#main">Skip to content</a>
+  <div class="shell">
+    <aside class="sidebar" aria-label="Dashboard navigation and takeaways">
+      <div class="toplinks">
+        <a href="https://satyampalkar.github.io/portfolio/">← Portfolio</a>
+        <a href="https://github.com/SatyamPalkar/Olist-Dashboard">Source on GitHub</a>
+      </div>
+      <div class="brand">
+        <div class="brand-title">OLIST</div>
+        <div class="brand-sub">RETAIL PERFORMANCE</div>
+        <div class="brand-page" id="brand-page">EXECUTIVE OVERVIEW</div>
+        <div class="brand-scope">Delivered orders · Sep 2016–Aug 2018 · BRL</div>
+      </div>
+      <nav class="nav" aria-label="Dashboard pages">
+        <a href="#overview" data-page="overview">Executive Overview</a>
+        <a href="#diagnostics" data-page="diagnostics">Delivery Diagnostics</a>
+        <a href="#seller" data-page="seller">Seller &amp; Fulfilment</a>
+        <a href="#action" data-page="action">Action Queue</a>
+      </nav>
+      <section class="takeaways" aria-labelledby="tk-h">
+        <h2 id="tk-h">KEY TAKEAWAYS</h2>
+        <div id="takeaways"></div>
+      </section>
+    </aside>
+
+    <main id="main" tabindex="-1">
+      <div id="loading" class="state-msg" role="status">Loading dashboard data…</div>
+      <div id="error" class="state-msg error" role="alert" hidden></div>
+
+      <!-- 1. Executive Overview -->
+      <section class="page" id="page-overview" data-title="EXECUTIVE OVERVIEW" hidden>
+        <h1 class="sr-only">Executive Overview</h1>
+        <div class="kpi-row" id="kpis"></div>
+        <div class="grid g-62-38">
+          <div class="card stack">
+            <div class="chart-block">
+              <h3>Monthly merchandise sales</h3>
+              <p class="sub">Sales more than doubled in a year, peaking in Nov 2017 (Black Friday), then flattened in 2018</p>
+              <div class="chart h-170" id="c-sales" role="img" aria-label="Monthly merchandise sales, Jan 2017 to Aug 2018"></div>
+            </div>
+            <div class="chart-block">
+              <h3>Late delivery rate by purchase month</h3>
+              <p class="sub">Logistics lagged demand: spikes in Nov 2017 (14%) and Feb–Mar 2018 (16–21%)</p>
+              <div class="chart h-140" id="c-late" role="img" aria-label="Monthly late delivery rate"></div>
+            </div>
+          </div>
+          <div class="card">
+            <h3>Late delivery vs review score</h3>
+            <p class="sub">Avg review (1–5) by delivery date vs promise. Association, not proven cause.</p>
+            <div class="chart h-330" id="c-timing" role="img" aria-label="Average review by delivery timing"></div>
+          </div>
+        </div>
+        <div class="grid g-3">
+          <div class="card"><h3>Top categories by sales</h3><p class="sub">Top 10 = 62% of merchandise sales (label: sales · share)</p><div class="chart h-300" id="c-cats"></div></div>
+          <div class="card"><h3>Top states by sales</h3><p class="sub">SP = 38% of sales. RJ, the #2 market, is late on 13.5% of orders</p><div class="chart h-300" id="c-states"></div></div>
+          <div class="card"><h3>Highest late-delivery rates</h3><p class="sub">States with 300+ delivered orders. Network average: 8.1%</p><div class="chart h-300" id="c-worst"></div></div>
+        </div>
+      </section>
+
+      <!-- 2. Delivery Diagnostics -->
+      <section class="page" id="page-diagnostics" data-title="DELIVERY DIAGNOSTICS" hidden>
+        <header class="band">
+          <h1>Late delivery is a network-wide timing shock, amplified by geography, not by product category</h1>
+          <p>Mar 2018: every region was 19%+ late (Northeast 36%, North 39%). States span 5.0–23.9% late; large categories only 5.5–9.8%. Measured on delivered orders; associations, not proven causes.</p>
+        </header>
+        <div class="filterbar" role="group" aria-label="Region filter">
+          <label for="region">Region</label>
+          <select id="region"><option value="">All regions</option></select>
+          <button type="button" class="btn" id="region-reset">Reset</button>
+          <span class="note" id="region-note">The filter applies to the heatmap and the state scatter only. Headline, categories, retention and instalments always use all delivered orders.</span>
+        </div>
+        <div class="card">
+          <h3>Late rate by customer region and purchase month</h3>
+          <p class="sub">Jan 2017 – Aug 2018. Regions sorted by late rate. Darker pink = later.</p>
+          <div class="chart h-230" id="c-heat" role="img" aria-label="Heatmap of late rate by region and month"></div>
+        </div>
+        <div class="grid g-35-34-31">
+          <div class="card"><h3>Late rate vs order volume by state</h3><p class="sub">States with 300+ delivered orders. Colour = action tier (pink Priority, amber Watch, cyan Monitor).</p><div class="chart h-380" id="c-scatter"></div></div>
+          <div class="card"><h3>Late rate and review by category</h3><p class="sub">22 categories with 1,000+ orders; pink = above the network rate. Label: late rate · avg review.</p><div class="chart h-380" id="c-catdiag"></div></div>
+          <div class="stack-col">
+            <div class="card"><h3>Repeat rate by first-order delivery</h3><p class="sub">Customers whose first delivered order was before Mar 2018 (6+ months to reorder). Association, not cause.</p><div class="chart h-150" id="c-ret"></div></div>
+            <div class="card"><h3>Credit-card instalments</h3><p class="sub">74,302 delivered card orders; band = max instalments on the order's card payments. Review and late rate: association only.</p><div id="t-inst"></div></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 3. Seller & Fulfilment -->
+      <section class="page" id="page-seller" data-title="SELLER & FULFILMENT" hidden>
+        <header class="band">
+          <h1>Late orders lose most of their time in carrier transit, not seller dispatch</h1>
+          <p>Late orders: 25.7 transit vs 5.8 dispatch days (on time: 7.9 vs 3.0), so ~86% of the extra 20.6 days is transit. Missed shipping limits (9.0% of orders): 24.4% late vs 6.5%. Associations on 96,281 delivered orders with a consistent hand-off date.</p>
+        </header>
+        <div class="grid g-3">
+          <div class="card"><h3>Seller dispatch</h3><p class="sub">Avg days from purchase to carrier hand-off</p><div class="chart h-150" id="c-disp"></div></div>
+          <div class="card"><h3>Carrier transit</h3><p class="sub">Avg days from hand-off to customer (same 0–38 day scale)</p><div class="chart h-150" id="c-tran"></div></div>
+          <div class="card"><h3>Late rate when the seller misses the shipping limit</h3><p class="sub">Hand-off after the seller's shipping-limit date. Association, not proven cause.</p><div class="chart h-150" id="c-ship"></div></div>
+        </div>
+        <div class="grid g-27-19-54">
+          <div class="card"><h3>Late rate by route</h3><p class="sub">Seller state → customer state, routes with 500+ seller-orders. Label: rate · volume</p><div class="chart h-520" id="c-routes"></div></div>
+          <div class="card"><h3>Late rate by seller state</h3><p class="sub">Seller states with 300+ seller-orders</p><div class="chart h-520" id="c-sstates"></div></div>
+          <div class="card"><h3>Seller exception list</h3><p class="sub">Top 15 of 210 sellers with 100+ seller-orders, ranked by excess late orders vs the 8.0% network rate (order × seller grain). Seller = first 8 characters of seller_id.</p><div id="t-sellers"></div></div>
+        </div>
+      </section>
+
+      <!-- 4. Action Queue -->
+      <section class="page" id="page-action" data-title="ACTION QUEUE" hidden>
+        <header class="band">
+          <h1>Six priority states hold 1,176 excess late orders. Rio de Janeiro alone has 663 (56%)</h1>
+          <p>Excess late orders = late orders − delivered orders × network late rate (8.11%). Fixed population: 21 states with 300+ delivered orders, Sep 2016 – Aug 2018. Selecting a state changes only the trend, never the headline or tiers.</p>
+        </header>
+        <div class="grid g-64-36">
+          <div class="card">
+            <h3>State exception queue</h3>
+            <p class="sub">Ranked by excess late orders. Select a state to filter the monthly trend; select it again or press Reset to clear.</p>
+            <div id="t-action"></div>
+          </div>
+          <div class="stack-col">
+            <div class="card">
+              <div class="card-head">
+                <h3 id="trend-title">Monthly late rate: all 27 states</h3>
+                <button type="button" class="btn" id="trend-reset" hidden>Reset</button>
+              </div>
+              <p class="sub" id="trend-sub">All delivered orders until a state is selected. Grey line = all states for context.</p>
+              <div class="chart h-260" id="c-trend" role="img" aria-label="Monthly late rate trend"></div>
+            </div>
+            <div class="card playbook">
+              <h3 class="accent">Playbook</h3>
+              <dl>
+                <dt>1 · Owner</dt><dd>Logistics / carrier management lead (owner to be confirmed by the business).</dd>
+                <dt>2 · Action</dt><dd>For Priority states: review carrier performance and the estimated-date setting per state; consider longer promised dates where carriers cannot meet them.</dd>
+                <dt>3 · Trigger</dt><dd>A state's monthly late rate is 3+ pp above the network rate for 2 consecutive months.</dd>
+                <dt>4 · Success measure</dt><dd>Excess late orders and late rate per state, monthly; guardrail: avg review and delivered-order volume.</dd>
+                <dt>5 · Next investigation</dt><dd>Seller &amp; Fulfilment shows most extra delay is carrier transit. Next: carrier-level performance on the worst routes (e.g. SP → RJ).</dd>
+              </dl>
+              <p class="fine">Recommendations are hypotheses from measured data, not proven causes.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <footer class="method" aria-labelledby="dm-h">
+        <h2 id="dm-h">Data &amp; method</h2>
+        <p><strong>Scope:</strong> 96,478 delivered orders purchased 15 Sep 2016 – 29 Aug 2018 from the public Olist Brazilian e-commerce dataset (BRL). Non-delivered orders are excluded so sales are not counted for unfulfilled orders.</p>
+        <p><strong>Definitions:</strong> merchandise sales = item price excl. freight · late = delivered after the estimated date (orders with both dates; 8 excluded) · network late rate 8.11% · excess late orders = late orders − orders × network rate · tiers (states with 300+ orders): Priority = 3+ pp above network and 50+ excess, Watch = 1+ pp above, Monitor otherwise · dispatch = purchase → carrier hand-off, transit = hand-off → customer (197 orders with missing or out-of-sequence dates excluded; 96,281 used) · seller and route figures use order × seller grain (8.0% network).</p>
+        <p><strong>Pipeline:</strong> CSV → PostgreSQL warehouse → single-grain extracts → aggregated JSON (no customer or order identifiers). Every figure is checked against an independent recomputation (<code>web/check_data.py</code>). Associations are labelled; none is a proven cause.</p>
+        <p><a href="https://github.com/SatyamPalkar/Olist-Dashboard">Source code, Tableau workbook and documentation on GitHub</a></p>
+      </footer>
+    </main>
+  </div>
+  <div id="tip" class="tip" role="tooltip" hidden></div>
+  <pre id="errlog" hidden></pre>
+</body>
+</html>
